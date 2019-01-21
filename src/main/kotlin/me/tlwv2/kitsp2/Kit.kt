@@ -1,5 +1,7 @@
 package me.tlwv2.kitsp2
 
+import me.tlwv2.kitsp2.defs.KitKeys
+import me.tlwv2.kitsp2.defs.Serialized
 import org.bukkit.Material
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.Player
@@ -17,9 +19,9 @@ fun defaultIcon(name: String): ItemStack{
 }
 
 class Kit() : ConfigurationSerializable{
-    var icon: ItemStack? = null
-    var inventory: Array<ItemStack>? = null
-    var effects: List<PotionEffect>? = null
+    lateinit var icon: ItemStack
+    lateinit var inventory: Array<ItemStack>
+    lateinit var effects: List<PotionEffect>
 
     constructor(name: String) : this(){
         icon = defaultIcon(name)
@@ -32,15 +34,17 @@ class Kit() : ConfigurationSerializable{
     }
 
     fun apply(player: Player){
-        TODO("not implemented")
+        player.inventory.contents = this.inventory
+        player.activePotionEffects.clear()
+        player.addPotionEffects(this.effects)
     }
 
     override fun serialize(): Serialized {
         var map: Serialized = mutableMapOf()
 
-        map[KitKeys.ICON] = this.icon as Object?
-        map[KitKeys.INVENTORY] = this.inventory as Object?
-        map[KitKeys.EFFECTS] = this.effects as Object?
+        map[KitKeys.ICON] = this.icon as Object
+        map[KitKeys.INVENTORY] = this.inventory as Object
+        map[KitKeys.EFFECTS] = this.effects as Object
 
         return map
     }

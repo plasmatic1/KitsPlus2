@@ -2,6 +2,10 @@ name: KitsPlus2
 main: me.tlwv2.kitsp2.Main
 version: 2.0
 commands:
+  permissioninfo:
+    description: Lists permission info
+    usage: /permissioninfo
+    aliases: [pinfo]
   createkit:
     description: Creates a kit
     usage: /createkit <name>
@@ -17,3 +21,9 @@ commands:
   editkitgui:
     description: Edit Kit GUI
     usage: /editkitgui
+  kittree:
+    description: Shows a tree of all kits and folders
+    usage: /kittree
+  unusedkits:
+    description: Lists all kits not currently in a folder
+    usage: /unusedkits

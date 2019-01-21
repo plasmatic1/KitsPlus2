@@ -1,4 +1,4 @@
-package me.tlwv2.kitsp2
+package me.tlwv2.kitsp2.defs
 
 class Perms{
     companion object{
@@ -17,10 +17,3 @@ class Chat{
     }
 }
 
-class KitKeys{
-    companion object {
-        const val ICON = "icon"
-        const val INVENTORY = "inventory"
-        const val EFFECTS = "effects"
-    }
-}

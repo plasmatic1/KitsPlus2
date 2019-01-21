@@ -1,11 +1,11 @@
 package me.tlwv2.kitsp2.commands
 
-import me.tlwv2.kitsp2.Chat
+import me.tlwv2.kitsp2.defs.Chat
 import me.tlwv2.kitsp2.Main
-import me.tlwv2.kitsp2.Perms
+import me.tlwv2.kitsp2.defs.Perms
 import org.bukkit.entity.Player
 
-class HelpCommand(private val main: Main) : KitsPlusCommand(Perms.PERMISSION_INFO) {
+class PermissionInfoCommand(private val main: Main) : KitsPlusCommand(Perms.PERMISSION_INFO) {
     override fun onPlayerCommand(player: Player, args: Array<out String>): Boolean {
         player.sendMessage("${Chat.GOLD}-- ${Chat.GREY}Permissions Info ${Chat.GOLD}--")
         for(command: CommandData in main.commands){
