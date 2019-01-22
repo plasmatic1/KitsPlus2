@@ -21,7 +21,7 @@ fun defaultIcon(name: String): ItemStack{
 class Kit() : ConfigurationSerializable{
     lateinit var icon: ItemStack
     lateinit var inventory: Array<ItemStack>
-    lateinit var effects: List<PotionEffect>
+    lateinit var effects: Array<PotionEffect>
 
     constructor(name: String) : this(){
         icon = defaultIcon(name)
@@ -30,13 +30,13 @@ class Kit() : ConfigurationSerializable{
     constructor(map: Serialized) : this(){
         this.icon = map[KitKeys.ICON] as ItemStack
         this.inventory = map[KitKeys.INVENTORY] as Array<ItemStack>
-        this.effects = map[KitKeys.EFFECTS] as List<PotionEffect>
+        this.effects = map[KitKeys.EFFECTS] as Array<PotionEffect>
     }
 
     fun apply(player: Player){
         player.inventory.contents = this.inventory
         player.activePotionEffects.clear()
-        player.addPotionEffects(this.effects)
+        player.addPotionEffects(this.effects.asList())
     }
 
     override fun serialize(): Serialized {

@@ -24,6 +24,6 @@ commands:
   kittree:
     description: Shows a tree of all kits and folders
     usage: /kittree
-  unusedkits:
+  listunused:
     description: Lists all kits not currently in a folder
-    usage: /unusedkits
+    usage: /listunused

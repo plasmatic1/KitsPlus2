@@ -5,6 +5,7 @@ import me.tlwv2.kitsp2.defs.FolderMap
 import me.tlwv2.kitsp2.defs.KitMap
 import me.tlwv2.kitsp2.defs.Serialized
 import org.bukkit.configuration.serialization.ConfigurationSerializable
+import org.bukkit.inventory.DoubleChestInventory
 
 class Folder() : ConfigurationSerializable{
     var subfolders: FolderMap = mutableMapOf()
@@ -13,22 +14,34 @@ class Folder() : ConfigurationSerializable{
     var size: Int = -1
     get() = this.subfolders.size + this.kits.size
 
-    fun searchKit(name: String): Boolean{
-        if(this.kits.containsKey(name)) return true
+    fun searchKit(name: String): Kit?{
+        var ret = this.kits[name]
+        if(ret != null) return ret
 
-        for(entry in this.subfolders)
-            if(entry.value.searchKit(name)) return true
+        for(entry in this.subfolders) {
+            ret = entry.value.searchKit(name)
+            if(ret != null) return ret
+        }
 
-        return false
+        return null
     }
 
     fun removeKit(name: String): Boolean{
         if(this.kits.remove(name) != null) return true
 
-        for(entry in this.subfolders)
+        for(entry in this.subfolders) {
             if(entry.value.removeKit(name)) return true
+        }
 
         return false
+    }
+
+    fun traverseKits(consumer: (String, Kit) -> Unit){
+        for(entry in this.kits)
+            consumer(entry.key, entry.value)
+
+        for(entry in this.subfolders)
+            entry.value.traverseKits(consumer)
     }
 
     constructor(map: Serialized) : this(){
@@ -44,4 +57,13 @@ class Folder() : ConfigurationSerializable{
 
         return map
     }
+}
+
+enum class FolderContext{
+    ROOT, ROOT_EDIT, DEFAULT, DEFAULT_EDIT, CHOOSE_KIT
+}
+
+class FolderContextManager{
+    var inventory: DoubleChestInventory? = null
+
 }
