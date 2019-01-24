@@ -4,6 +4,7 @@ import me.tlwv2.kitsp2.Main
 import me.tlwv2.kitsp2.commands.messages.ErrorMessages
 import me.tlwv2.kitsp2.commands.messages.InfoMessages
 import me.tlwv2.kitsp2.defs.Perms
+import org.bukkit.Material
 import org.bukkit.entity.Player
 
 class EditKitCommand(main: Main) : KitsPlusCommand(Perms.EDIT_KIT, main) {
@@ -23,7 +24,15 @@ class EditKitCommand(main: Main) : KitsPlusCommand(Perms.EDIT_KIT, main) {
 
         when(args[1]){
             "icon" -> {
-                kit!!.icon = player.inventory.itemInMainHand.clone()
+                val item = player.inventory.itemInMainHand.clone()
+
+                if(item.type == Material.ENCHANTED_BOOK){
+                    ErrorMessages.invalid(player, "icon (Item cannot be an enchanted book)!")
+                    return true
+                }
+
+                kit!!.icon = item
+
                 main.kitIconMap.remove(kit!!.icon)
                 main.kitIconMap[kit!!.icon] = kit!!
             }

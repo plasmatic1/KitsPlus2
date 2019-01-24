@@ -3,6 +3,7 @@ package me.tlwv2.kitsp2
 import me.tlwv2.kitsp2.commands.*
 import me.tlwv2.kitsp2.defs.GeneralKeys
 import me.tlwv2.kitsp2.defs.KitMap
+import me.tlwv2.kitsp2.defs.ContextMap
 import org.bukkit.configuration.serialization.ConfigurationSerialization
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
@@ -14,7 +15,8 @@ class Main : JavaPlugin() {
     lateinit var unusedKits: KitMap
     lateinit var kitIconMap: MutableMap<ItemStack, Kit>
 
-    //TODO: Maintain state for players that are using the Kit Gui, whether to find, edit, or do whatever
+    var mainContexts: ContextMap = mutableMapOf()
+    var pickerContexts: ContextMap = mutableMapOf()
 
     override fun onLoad() {
         super.onLoad()
@@ -32,6 +34,7 @@ class Main : JavaPlugin() {
             mutableMapOf<String, Kit>()) as KitMap
 
         rootFolder.traverseKits { name, kit -> kitIconMap.put(kit.icon, kit) }
+        rootFolder.assignParents()
 
         // -- Registering Commands
         registerCommand("createkit", CreateKitCommand(this))

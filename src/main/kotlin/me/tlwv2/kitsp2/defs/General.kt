@@ -1,6 +1,8 @@
 package me.tlwv2.kitsp2.defs
 
+import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 
 class Perms{
@@ -47,10 +49,51 @@ class GUIItems{
             return stack
         }
 
+        // -- Important ItemStacks used by the GUI Inventory --
         val BORDER = namedItem("${Chat.BLACK}-", Material.BLACK_STAINED_GLASS_PANE)
         val INVALID = namedItem("${Chat.BLACK}-", Material.GRAY_STAINED_GLASS_PANE)
         val BACK = namedItem("${Chat.RED}Back", Material.RED_STAINED_GLASS_PANE)
         val ADD_KIT = namedItem("${Chat.AQUA}Add Folder/Kit", Material.NETHER_STAR)
         val DELETE_FOLDER = namedItem("${Chat.RED}Delete Folder", Material.REDSTONE_BLOCK)
+
+        const val INV_SIZE = 54
+
+        // -- GUI Inventory Templates and Constants --
+        val INVALID_INVENTORY: Inventory =
+            Bukkit.createInventory(null, 9, "Invalid!")
+        var VALID_SLOTS: MutableList<Int> = mutableListOf()
+        private var BASE_TEMPLATE: Array<ItemStack?> = arrayOfNulls(INV_SIZE)
+
+        init {
+            for (i in 0..8)
+                BASE_TEMPLATE[i] = BORDER
+
+            for (i in 45..53)
+                BASE_TEMPLATE[i] = BORDER
+
+            for (i in 0..45 step 9) {
+                BASE_TEMPLATE[i] = BORDER
+                BASE_TEMPLATE[i + 8] = BORDER
+            }
+
+            for (i in 10..37 step 9) {
+                for (j in i..i + 6) {
+                    BASE_TEMPLATE[i] = INVALID
+                    VALID_SLOTS.add(j)
+                }
+            }
+        }
+
+        // -- The actual templates used by the other classes --
+        var EDIT_TEMPLATE: Array<ItemStack?> = BASE_TEMPLATE.clone()
+        var DEFAULT_TEMPLATE: Array<ItemStack?> = BASE_TEMPLATE.clone()
+
+        init{
+            EDIT_TEMPLATE[47] = ADD_KIT
+            EDIT_TEMPLATE[49] = BACK
+            EDIT_TEMPLATE[51] = DELETE_FOLDER
+
+            DEFAULT_TEMPLATE[49] = BACK
+        }
     }
 }

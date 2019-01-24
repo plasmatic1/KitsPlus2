@@ -1,11 +1,14 @@
 package me.tlwv2.kitsp2.defs
 
 import me.tlwv2.kitsp2.Folder
+import me.tlwv2.kitsp2.FolderContext
 import me.tlwv2.kitsp2.Kit
+import java.util.*
 
 typealias Serialized = MutableMap<String, Any>
 typealias KitMap = MutableMap<String, Kit>
 typealias FolderMap = MutableMap<String, Folder>
+typealias ContextMap = MutableMap<UUID, FolderContext>
 
 class KitKeys{
     companion object {

@@ -15,6 +15,8 @@ object ErrorMessages{
 
     fun kitExists(player: Player, invalidName: String) = player.sendMessage("${Chat.RED}Kit \"$invalidName\" already exists!")
 
+    fun invalid(player: Player, invalid: String) = player.sendMessage("${Chat.RED}Invalid $invalid!")
+
     fun invalidChoice(player: Player, invalidChoice: String) = player.sendMessage("${Chat.RED}Invalid choice $invalidChoice!")
 }
 
