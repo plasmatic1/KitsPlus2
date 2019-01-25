@@ -12,9 +12,13 @@ class Perms{
         const val DELETE_KIT = "kitsp.use.deletekit"
         const val EDIT_KIT = "kitsp.use.editkit"
 
+        // -- Kit Folder Manipulation --
+        const val LINK_KIT = "kitsp.use.linkkit"
+        const val UNLINK_KIT = "kitsp.use.unlinkkit"
+        const val UNLINK_FOLDER = "kitsp.use.unlinkfolder"
+
         // -- Kit GUI --
         const val KIT_GUI = "kitsp.use.kitgui"
-        const val EDIT_KIT_GUI = "kitsp.use.editkitgui"
 
         // -- Listing Kit Info --
         const val PERMISSION_INFO = "kitsp.use.pinfo"
@@ -53,8 +57,6 @@ class GUIItems{
         val BORDER = namedItem("${Chat.BLACK}-", Material.BLACK_STAINED_GLASS_PANE)
         val INVALID = namedItem("${Chat.BLACK}-", Material.GRAY_STAINED_GLASS_PANE)
         val BACK = namedItem("${Chat.RED}Back", Material.RED_STAINED_GLASS_PANE)
-        val ADD_KIT = namedItem("${Chat.AQUA}Add Folder/Kit", Material.NETHER_STAR)
-        val DELETE_FOLDER = namedItem("${Chat.RED}Delete Folder", Material.REDSTONE_BLOCK)
 
         const val INV_SIZE = 54
 
@@ -78,21 +80,16 @@ class GUIItems{
 
             for (i in 10..37 step 9) {
                 for (j in i..i + 6) {
-                    BASE_TEMPLATE[i] = INVALID
+                    BASE_TEMPLATE[j] = INVALID
                     VALID_SLOTS.add(j)
                 }
             }
         }
 
         // -- The actual templates used by the other classes --
-        var EDIT_TEMPLATE: Array<ItemStack?> = BASE_TEMPLATE.clone()
         var DEFAULT_TEMPLATE: Array<ItemStack?> = BASE_TEMPLATE.clone()
 
         init{
-            EDIT_TEMPLATE[47] = ADD_KIT
-            EDIT_TEMPLATE[49] = BACK
-            EDIT_TEMPLATE[51] = DELETE_FOLDER
-
             DEFAULT_TEMPLATE[49] = BACK
         }
     }

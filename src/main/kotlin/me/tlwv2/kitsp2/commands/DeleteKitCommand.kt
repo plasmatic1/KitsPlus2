@@ -20,7 +20,7 @@ class DeleteKitCommand(main: Main) : KitsPlusCommand(Perms.DELETE_KIT, main) {
             return true
         }
 
-        main.kitIconMap.remove(kit!!.icon)
+        main.kitIconMap.remove(kit.icon)
         main.removeKit(args[0])
 
         InfoMessages.success(player)

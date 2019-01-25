@@ -4,9 +4,10 @@ import me.tlwv2.kitsp2.Main
 import me.tlwv2.kitsp2.defs.Perms
 import org.bukkit.entity.Player
 
-class EditKitGuiCommand(main: Main) : KitsPlusCommand(Perms.EDIT_KIT_GUI, main) {
+class UnlinkFolderCommand(main: Main) : KitsPlusCommand(Perms.UNLINK_FOLDER, main) {
     override fun onPlayerCommand(player: Player, args: Array<out String>): Boolean {
-        TODO("Not Implemented")
+        TODO("Command")
+
         return true
     }
 }

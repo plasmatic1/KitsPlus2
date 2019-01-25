@@ -1,29 +1,36 @@
 name: KitsPlus2
 main: me.tlwv2.kitsp2.Main
-version: 2.0
+version: 1.0
+api-version: 1.13
 commands:
-  permissioninfo:
-    description: Lists permission info
-    usage: /permissioninfo
-    aliases: [pinfo]
   createkit:
     description: Creates a kit
     usage: /createkit <name>
   deletekit:
     description: Deletes a kit
     usage: /deletekit <name>
+  linkkit:
+    description: Links a kit to a folder path.  Note that if the path does not exist yet, folders will be created to accomodate it.  Path must be dot separated
+    usage: /linkkit <folder path> <kit name>
+  unlinkkit:
+    description: Removes a kit that is currently in the kit tree and places it into the unused section
+    usage: /unlinkkit <kit name>
+  unlinkfolder:
+    description: Deletes the folder and all subfolders represented by the path.  Any kits contained will be put into the unused section
+    usage: /unlinkfolder <folder path>
   editkit:
     description: Edits a kit
     usage: /editkit <name> <inventory:effects:icon>
   kitgui:
     description: Opens Kit GUI
     usage: /kitgui
-  editkitgui:
-    description: Edit Kit GUI
-    usage: /editkitgui
   kittree:
     description: Shows a tree of all kits and folders
     usage: /kittree
   listunused:
     description: Lists all kits not currently in a folder
     usage: /listunused
+  permissioninfo:
+    description: Lists permission info
+    usage: /permissioninfo
+    aliases: [pinfo]

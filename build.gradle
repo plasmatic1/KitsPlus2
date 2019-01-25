@@ -13,15 +13,31 @@ repositories {
 }
 
 ext {
-    dir = "${System.properties['user.home']}/Desktop/spigot/"
+    desktopDir = "${System.properties['user.home']}/Desktop"
+    dir = "${desktopDir}/spigot/"
     spigot = files "${dir}spigot-1.13.2.jar"
 }
 
+libsDirName = "${desktopDir}/test-server/plugins/"
+
+configurations {
+    shade
+    compile.extendsFrom shade
+}
+
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    shade "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile spigot
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
 }
 
 compileKotlin {

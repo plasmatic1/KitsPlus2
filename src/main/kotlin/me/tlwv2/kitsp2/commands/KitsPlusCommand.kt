@@ -15,7 +15,7 @@ abstract class KitsPlusCommand(val permission: String?, protected val main: Main
         }
 
         if(this.permission != null && !sender.hasPermission(permission)){
-            sender!!.sendMessage(Chat.NO_PERM_MESSAGE)
+            sender.sendMessage(Chat.NO_PERM_MESSAGE)
             return true
         }
 
