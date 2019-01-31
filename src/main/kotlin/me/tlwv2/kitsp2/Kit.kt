@@ -1,6 +1,5 @@
 package me.tlwv2.kitsp2
 
-import me.tlwv2.kitsp2.defs.GUIItems
 import me.tlwv2.kitsp2.defs.KitKeys
 import me.tlwv2.kitsp2.defs.Serialized
 import org.bukkit.Bukkit

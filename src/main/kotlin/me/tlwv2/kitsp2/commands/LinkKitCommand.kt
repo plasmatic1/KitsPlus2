@@ -38,7 +38,7 @@ class LinkKitCommand(main: Main) : KitsPlusCommand(Perms.LINK_KIT, main) {
     override fun onPlayerCommand(player: Player, args: Array<out String>): Boolean {
         if(args.size != 2){
             ErrorMessages.argLength(player, args.size, 2)
-            return true
+            return false
         }
 
         var kit = main.unusedKits[args[1]]

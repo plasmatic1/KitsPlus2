@@ -10,7 +10,7 @@ class DeleteKitCommand(main: Main) : KitsPlusCommand(Perms.DELETE_KIT, main) {
     override fun onPlayerCommand(player: Player, args: Array<out String>): Boolean {
         if(args.size != 1){
             ErrorMessages.argLength(player, args.size, 1)
-            return true
+            return false
         }
 
         val kit = main.searchKit(args[0])

@@ -11,7 +11,7 @@ class CreateKitCommand(main: Main) : KitsPlusCommand(Perms.CREATE_KIT, main) {
     override fun onPlayerCommand(player: Player, args: Array<out String>): Boolean {
         if(args.size != 1){
             ErrorMessages.argLength(player, args.size, 1)
-            return true
+            return false
         }
 
         if(main.searchKit(args[0]) != null){

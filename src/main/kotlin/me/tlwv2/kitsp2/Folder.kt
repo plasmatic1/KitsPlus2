@@ -88,32 +88,18 @@ class Folder() : ConfigurationSerializable{
     }
 
     /*
-    Removes the folder with the given name.  If the removal was successful, the function returns true.
-    Otherwise, the function will return false.
-
-    A folder that is removed will delete all subfolders and moves all kits contained within to the unused section.
-     */
-    fun removeFolder(name: String): Boolean{
-        if(this.subfolders.remove(name)?.removeSubfolders() != null) return true
-
-        for(entry in this.subfolders)
-            if(entry.value.removeFolder(name)) return true
-
-        return false
-    }
-
-    /*
-    Private function that removes all subfolders and moves all kits into the unused section.  This is called by the
+    Function that removes all subfolders and moves all kits into the unused section.  This is called by the
     Folder.removeFolder(name) function
      */
-    private fun removeSubfolders(): Boolean{
+    fun deconstruct(): Boolean{
         for(entry in this.kits)
             main.unusedKits[entry.key] = entry.value
 
-        for(entry in this.subfolders){
-            entry.value.removeSubfolders()
-            this.subfolders.remove(entry.key)
-        }
+        for(entry in this.subfolders)
+            entry.value.deconstruct()
+
+        this.kits.clear()
+        this.subfolders.clear()
 
         return true
     }

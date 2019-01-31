@@ -77,6 +77,9 @@ class Main : JavaPlugin() {
         logger.info("Finished initialization!")
     }
 
+    /*
+    Disable function.  The config files are saved
+     */
     override fun onDisable() {
         super.onDisable()
 
